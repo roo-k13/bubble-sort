@@ -1,43 +1,30 @@
-public class BubbleSort {
-    private int[] array;
-    private boolean areThereSwapsLeft;
+class BubbleSort {
 
-    BubbleSort(int[] array) {
-        this.array = array;
-        sort();
+    private BubbleSort() { }
+
+    static int[] sortArray(int[] array) {
+        int[] sortedArray = sort(array);
+        return sort(sortedArray);
     }
 
-    private void SwapValues() {
+    private static int[] sort(int[] array) {
+
         int length = array.length;
-        for (byte i = 0 ; i < length - 1; ++i) {
-            for(byte j = 0; j < length - i - 1; ++j) {
-                if(array[j+1]<array[j]){
-                    int swap = array[j];
-                    array[j] = array[j+1];
-                    array[j+1] = swap;
+
+        for (int i = 0; i < length - 1; i++) {
+            for (int j = 0; j < length - i - 1; j++) {
+                if (array[j + 1] < array[j]) {
+                    swapValues(array, j, j + 1);
                 }
             }
         }
+
+        return array;
     }
 
-    private void sort() {
-        do {
-            SwapValues();
-        } while (areThereSwapsLeft == true);
-    }
-
-    public String toString() {
-        int length = array.length;
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (byte i = 0; i < length; i++) {
-            sb.append(array[i]);
-            
-            if (i != (length - 1)) {
-                sb.append(", ");
-            } 
-            else { sb.append("]"); }
-        }
-        return sb.toString();
+    private static void swapValues(int[] array, int index1, int index2) {
+        int temp = array[index1];
+        array[index1] = array[index2];
+        array[index2] = temp;
     }
 }
